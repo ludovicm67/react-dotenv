@@ -20,12 +20,13 @@ const patchIndexHtml = (html) => {
   return prettier.format($.html(), { parser: "html" });
 }
 
+const reactAppPath = "../../../..";
 
 /** Load app's package.json */
-const appPackage = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../package.json")));
+const appPackage = JSON.parse(fs.readFileSync(path.resolve(__dirname, `${reactAppPath}/package.json`)));
 
 /** Load app's .env file */
-dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+dotenv.config({ path: path.resolve(__dirname, `${reactAppPath}/.env`) });
 
 /**
  * Read environment variables whitelist
@@ -47,17 +48,17 @@ const env = whitelist.length ? pick(process.env, whitelist) : process.env;
 
 const envFile = `window.env = ${JSON.stringify(env, null, 2)};`;
 
-fs.writeFileSync(path.resolve(__dirname, "../../../public/env.js"), envFile);
+fs.writeFileSync(path.resolve(__dirname, `${reactAppPath}/public/env.js`), envFile);
 
-fs.access(path.resolve(__dirname, "../../../build"), fs.constants.W_OK, (err) => {
+fs.access(path.resolve(__dirname, `${reactAppPath}/build`), fs.constants.W_OK, (err) => {
   if (err) return;
-  fs.writeFileSync(path.resolve(__dirname, "../../../build/env.js"), envFile);
+  fs.writeFileSync(path.resolve(__dirname, `${reactAppPath}/build/env.js`), envFile);
 });
 
 /**
  * Patch app's public/index.html
  */
-const publicIndexHtmlPath = path.resolve(__dirname, "../../../public/index.html");
+const publicIndexHtmlPath = path.resolve(__dirname, `${reactAppPath}/public/index.html`);
 const publicIndexHtmlSource = fs.readFileSync(publicIndexHtmlPath);
 const publicIndexIndexPatched = patchIndexHtml(publicIndexHtmlSource);
 fs.writeFileSync(publicIndexHtmlPath, publicIndexIndexPatched);
@@ -65,7 +66,7 @@ fs.writeFileSync(publicIndexHtmlPath, publicIndexIndexPatched);
 /**
  * Patch app's build/index.html
  */
-const buildIndexHtmlPath = path.resolve(__dirname, "../../../build/index.html");
+const buildIndexHtmlPath = path.resolve(__dirname, `${reactAppPath}/build/index.html`);
 fs.access(buildIndexHtmlPath, fs.constants.W_OK, (err) => {
   if (err) return;
   const buildIndexHtmlSource = fs.readFileSync(buildIndexHtmlPath);
