@@ -8,6 +8,19 @@ const prettier = require("prettier");
 const get = require("lodash/get");
 const pick = require("lodash/pick");
 
+const patchIndexHtml = (html) => {
+  let $ = cheerio.load(html);
+
+  if ($("script#react-dotenv").length) {
+    $("script#react-dotenv").attr("src", `${homepage}/env.js`);
+  } else {
+    $("head").append(`\t<script id="react-dotenv" src="${homepage}/env.js"></script>\n\t`);
+  }
+
+  return prettier.format($.html(), { parser: "html" });
+}
+
+
 /** Load app's package.json */
 const appPackage = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../package.json")));
 
@@ -24,7 +37,7 @@ const whitelist = get(appPackage, "react-dotenv.whitelist", []);
  * Check for custom homepage (basepath)
  * More Info: https://create-react-app.dev/docs/deployment/#building-for-relative-paths
  */
-const homepage = get(appPackage, "homepage", ".");
+const homepage = get(appPackage, "homepage", "%PUBLIC_URL%");
 
 /**
  * Remove all environment variables
@@ -59,15 +72,3 @@ fs.access(buildIndexHtmlPath, fs.constants.W_OK, (err) => {
   const buildIndexIndexPatched = patchIndexHtml(buildIndexHtmlSource);
   fs.writeFileSync(buildIndexHtmlPath, buildIndexIndexPatched);
 });
-
-function patchIndexHtml(html) {
-  let $ = cheerio.load(html);
-
-  if ($("script#react-dotenv").length) {
-    $("script#react-dotenv").attr("src", `${homepage}/env.js`);
-  } else {
-    $("head").append(`\t<script id="react-dotenv" src="${homepage}/env.js"></script>\n\t`);
-  }
-
-  return prettier.format($.html(), { parser: "html" });
-}

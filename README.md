@@ -1,11 +1,13 @@
 # react-dotenv 🎛
 
+Forked from [jeserodz/react-dotenv](https://github.com/jeserodz/react-dotenv/commit/5ca0fe8ae117f18ae43ca965534c4c3d13f81897).
+
 Load environment variables dynamically for your React applications created with CRA (Create-React-App).
 
 # Installation
 
 ```sh
-npm install react-dotenv
+npm install @ludovicm67/react-dotenv
 ```
 
 # Usage
@@ -23,15 +25,8 @@ Open your project's `package.json` file and:
 **package.json**:
 ```js
 {
-  "name": "my-react-app",
-  "version": "0.1.0",
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-dotenv": "^0.1.0",
-    "react-scripts": "3.4.3",
-    "serve": "^11.3.2"
-  },
+  // …
+
   "scripts": {
     "start": "react-dotenv && react-scripts start", // <-- append command
     "build": "react-dotenv && react-scripts build", // <-- append command
@@ -41,10 +36,6 @@ Open your project's `package.json` file and:
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   // Add the react-dotenv configuration
   "react-dotenv": {
@@ -69,7 +60,7 @@ You can access the environment variables from your code in two ways:
 
 ```jsx
 import React from "react";
-import env from "react-dotenv";
+import env from "@ludovicm67/react-dotenv";
 
 export function MyComponent() {
   return <div>{env.API_URL}</div>;
