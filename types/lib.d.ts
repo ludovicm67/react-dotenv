@@ -1,3 +1,3 @@
-declare const env: any;
+declare const env: Record<string, string>;
 
 export default env;

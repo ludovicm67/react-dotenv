@@ -4,8 +4,9 @@
   "description": "Load environment variables dynamically for your React applications created with CRA (Create-React-App).",
   "license": "MIT",
   "module": "./src/lib.js",
+  "type": "module",
   "bin": {
-    "react-dotenv": "./src/cli.js"
+    "react-dotenv": "./src/cli.mjs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
