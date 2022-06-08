@@ -11,13 +11,13 @@ import pick from "lodash/pick.js";
 
 const dir = dirname(fileURLToPath(import.meta.url));
 
-const patchIndexHtml = (html) => {
+const patchIndexHtml = (html, publicUrl = '/') => {
   let $ = load(html);
 
   if ($("script#react-dotenv").length) {
-    $("script#react-dotenv").attr("src", `${homepage}/env.js`);
+    $("script#react-dotenv").attr("src", `${publicUrl}/env.js`);
   } else {
-    $("head").append(`\t<script id="react-dotenv" src="${homepage}/env.js"></script>\n\t`);
+    $("head").append(`\t<script id="react-dotenv" src="${publicUrl}/env.js"></script>\n\t`);
   }
 
   return format($.html(), { parser: "html" });
@@ -63,7 +63,7 @@ access(resolve(dir, `${reactAppPath}/build`), constants.W_OK, (err) => {
  */
 const publicIndexHtmlPath = resolve(dir, `${reactAppPath}/public/index.html`);
 const publicIndexHtmlSource = readFileSync(publicIndexHtmlPath);
-const publicIndexIndexPatched = patchIndexHtml(publicIndexHtmlSource);
+const publicIndexIndexPatched = patchIndexHtml(publicIndexHtmlSource, homepage);
 writeFileSync(publicIndexHtmlPath, publicIndexIndexPatched);
 
 /**
@@ -73,6 +73,6 @@ const buildIndexHtmlPath = resolve(dir, `${reactAppPath}/build/index.html`);
 access(buildIndexHtmlPath, constants.W_OK, (err) => {
   if (err) return;
   const buildIndexHtmlSource = readFileSync(buildIndexHtmlPath);
-  const buildIndexIndexPatched = patchIndexHtml(buildIndexHtmlSource);
+  const buildIndexIndexPatched = patchIndexHtml(buildIndexHtmlSource, homepage === "%PUBLIC_URL%" ? "" : homepage);
   writeFileSync(buildIndexHtmlPath, buildIndexIndexPatched);
 });
