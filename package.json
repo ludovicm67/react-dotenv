@@ -8,6 +8,10 @@
   "bin": {
     "react-dotenv": "./src/cli.mjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludovicm67/react-dotenv.git"
+  },
   "author": {
     "name": "Ludovic Muller",
     "url": "https://ludovic-muller.fr/"
