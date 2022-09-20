@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.2",
     "lodash": "^4.17.21",
     "prettier": "^2.7.1"
   },
