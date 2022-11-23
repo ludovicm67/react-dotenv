@@ -21,9 +21,9 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.0"
   },
   "types": "./types/lib.d.ts",
   "keywords": [
