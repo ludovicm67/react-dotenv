@@ -11,7 +11,7 @@ import pick from "lodash/pick.js";
 
 const dir = dirname(fileURLToPath(import.meta.url));
 
-const patchIndexHtml = (html, publicUrl = '/') => {
+const patchIndexHtml = async (html, publicUrl = '/') => {
   let $ = load(html);
 
   if ($("script#react-dotenv").length) {
@@ -63,16 +63,16 @@ access(resolve(dir, `${reactAppPath}/build`), constants.W_OK, (err) => {
  */
 const publicIndexHtmlPath = resolve(dir, `${reactAppPath}/public/index.html`);
 const publicIndexHtmlSource = readFileSync(publicIndexHtmlPath);
-const publicIndexIndexPatched = patchIndexHtml(publicIndexHtmlSource, homepage);
+const publicIndexIndexPatched = await patchIndexHtml(publicIndexHtmlSource, homepage);
 writeFileSync(publicIndexHtmlPath, publicIndexIndexPatched);
 
 /**
  * Patch app's build/index.html
  */
 const buildIndexHtmlPath = resolve(dir, `${reactAppPath}/build/index.html`);
-access(buildIndexHtmlPath, constants.W_OK, (err) => {
+access(buildIndexHtmlPath, constants.W_OK, async (err) => {
   if (err) return;
   const buildIndexHtmlSource = readFileSync(buildIndexHtmlPath);
-  const buildIndexIndexPatched = patchIndexHtml(buildIndexHtmlSource, homepage === "%PUBLIC_URL%" ? "" : homepage);
+  const buildIndexIndexPatched = await patchIndexHtml(buildIndexHtmlSource, homepage === "%PUBLIC_URL%" ? "" : homepage);
   writeFileSync(buildIndexHtmlPath, buildIndexIndexPatched);
 });
