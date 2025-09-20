@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-import { readFileSync, writeFileSync, access, constants } from "fs";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
+import { readFileSync, writeFileSync, access, constants } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { config } from "dotenv";
 import { load } from "cheerio";
 import { format } from "prettier";
@@ -29,7 +30,7 @@ const reactAppPath = "../../../..";
 const appPackage = JSON.parse(readFileSync(resolve(dir, `${reactAppPath}/package.json`)));
 
 /** Load app's .env file */
-config({ path: resolve(dir, `${reactAppPath}/.env`) });
+config({ path: resolve(dir, `${reactAppPath}/.env`), quiet: true });
 
 /**
  * Read environment variables whitelist
