@@ -30,6 +30,7 @@ Open your project's `package.json` file and add:
 Here is an example:
 
 **package.json**:
+
 ```js
 {
   // …other fields
@@ -69,7 +70,7 @@ import React from "react";
 import env from "@ludovicm67/react-dotenv";
 
 const MyComponent = () => {
-  return <div>{ env.API_URL }</div>;
+  return <div>{env.API_URL}</div>;
 };
 
 export default MyComponent;
@@ -81,7 +82,7 @@ export default MyComponent;
 import React from "react";
 
 const MyComponent = () => {
-  return <div>{ window.env.API_URL }</div>;
+  return <div>{window.env.API_URL}</div>;
 };
 
 export default MyComponent;
@@ -96,6 +97,7 @@ This only supports one environment (so only one `.env` file) and is not meant to
 Forked from [jeserodz/react-dotenv](https://github.com/jeserodz/react-dotenv/commit/5ca0fe8ae117f18ae43ca965534c4c3d13f81897).
 
 Reasons:
+
 - upgrade dependencies
 - use ESM
 - fix TypeScript types
