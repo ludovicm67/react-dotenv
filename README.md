@@ -1,5 +1,9 @@
 # react-dotenv
 
+> [!WARNING]
+> This package is deprecated and archived since `create-react-app` is being sunsetted.
+> See: https://react.dev/blog/2025/02/14/sunsetting-create-react-app
+
 Load environment variables dynamically for your React applications created with `create-react-app`.
 
 This will create a `env.js` file in your `public` and `build` directories, which will expose your environment variables you want in the global `window.env` variable.
@@ -63,7 +67,7 @@ Now your project have the environment variables loaded **globally** in the `wind
 
 You can access the environment variables from your code in two ways:
 
-#### Using the `@ludovicm67/react-dotenv` library
+#### Using the `@ludovicm67/react-dotenv` library (recommended)
 
 ```jsx
 import React from "react";
@@ -96,7 +100,7 @@ This only supports one environment (so only one `.env` file) and is not meant to
 
 Forked from [jeserodz/react-dotenv](https://github.com/jeserodz/react-dotenv/commit/5ca0fe8ae117f18ae43ca965534c4c3d13f81897).
 
-Reasons:
+**Reasons:**
 
 - upgrade dependencies
 - use ESM
