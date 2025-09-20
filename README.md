@@ -2,6 +2,7 @@
 
 > [!WARNING]
 > This package is deprecated and archived since `create-react-app` is being sunsetted.
+>
 > See: https://react.dev/blog/2025/02/14/sunsetting-create-react-app
 
 Load environment variables dynamically for your React applications created with `create-react-app`.
