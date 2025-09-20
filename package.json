@@ -6,7 +6,7 @@
   "module": "./src/lib.js",
   "type": "module",
   "bin": {
-    "react-dotenv": "./src/cli.mjs"
+    "react-dotenv": "src/cli.mjs"
   },
   "repository": {
     "type": "git",
